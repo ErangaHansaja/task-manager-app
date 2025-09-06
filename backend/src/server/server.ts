@@ -1,5 +1,9 @@
 import express, { Application, Request, Response } from 'express';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+// Load environment variables from env/.env
+dotenv.config({ path: './env/.env' });
 
 class App {
   private app: Application;
@@ -23,7 +27,10 @@ class App {
   }
 
   private setupMongoDB(): void {
-    const mongoURI = 'mongodb+srv://erangahansaja222_db_user:gDJwIbrBV6QWfDzf@taskmanagercluster.zm7vs90.mongodb.net/?retryWrites=true&w=majority&appName=TaskManagerCluster';
+    const dbUser = process.env.DB_USER || 'default_user';
+    const dbPass = process.env.DB_PASS || 'default_pass';
+    const dbName = process.env.DB_NAME || 'task-manager';
+    const mongoURI = `mongodb+srv://${dbUser}:${dbPass}@taskmanagercluster.zm7vs90.mongodb.net/?retryWrites=true&w=majority&appName=${dbName}`;
     mongoose
       .connect(mongoURI)
       .then(() => console.log('Connected to MongoDB Atlas'))
