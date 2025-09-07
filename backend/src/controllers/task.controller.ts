@@ -5,7 +5,7 @@ import { Task } from '../interfaces/task.interface';
 export class TaskController {
   public async createTask(req: Request, res: Response): Promise<void> {
     try {
-      const task: Task = req.body;
+      const task: Task = { ...req.body, userId: req.user?.userId };
       const newTask = new TaskModel(task);
       await newTask.save();
       res.status(201).json(newTask);
@@ -16,7 +16,7 @@ export class TaskController {
 
   public async getTasks(req: Request, res: Response): Promise<void> {
     try {
-      const tasks = await TaskModel.find();
+      const tasks = await TaskModel.find({ userId: req.user?.userId });
       res.status(200).json(tasks);
     } catch (error) {
       res.status(500).json({ message: 'Error fetching tasks', error });
@@ -25,9 +25,9 @@ export class TaskController {
 
   public async getTaskById(req: Request, res: Response): Promise<void> {
     try {
-      const task = await TaskModel.findById(req.params.id);
+      const task = await TaskModel.findOne({ _id: req.params.id, userId: req.user?.userId });
       if (!task) {
-        res.status(404).json({ message: 'Task not found' });
+        res.status(404).json({ message: 'Task not found or not authorized' });
         return;
       }
       res.status(200).json(task);
@@ -38,11 +38,13 @@ export class TaskController {
 
   public async updateTask(req: Request, res: Response): Promise<void> {
     try {
-      const task = await TaskModel.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-      });
+      const task = await TaskModel.findOneAndUpdate(
+        { _id: req.params.id, userId: req.user?.userId },
+        req.body,
+        { new: true }
+      );
       if (!task) {
-        res.status(404).json({ message: 'Task not found' });
+        res.status(404).json({ message: 'Task not found or not authorized' });
         return;
       }
       res.status(200).json(task);
@@ -53,9 +55,12 @@ export class TaskController {
 
   public async deleteTask(req: Request, res: Response): Promise<void> {
     try {
-      const task = await TaskModel.findByIdAndDelete(req.params.id);
+      const task = await TaskModel.findOneAndDelete({
+        _id: req.params.id,
+        userId: req.user?.userId,
+      });
       if (!task) {
-        res.status(404).json({ message: 'Task not found' });
+        res.status(404).json({ message: 'Task not found or not authorized' });
         return;
       }
       res.status(204).send();

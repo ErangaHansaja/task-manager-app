@@ -1,11 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es6",              // Compile to ES6 (compatible with Node.js)
-    "module": "commonjs",         // Use CommonJS for Node.js
-    "outDir": "./dist",           // Output compiled JS to dist folder
-    "rootDir": "./src",           // Source TS files in src folder
-    "strict": true,               // Enforce strict type checking (like your company)
-    "esModuleInterop": true,      // Allow importing CommonJS modules in TypeScript
-    "skipLibCheck": true          // Skip checking type definitions for faster compilation
-  }
+    "target": "ES2020",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
