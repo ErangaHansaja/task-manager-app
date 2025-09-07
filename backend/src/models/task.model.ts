@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Types } from 'mongoose';
 import { Task } from '../interfaces/task.interface';
 
 const TaskSchema = new Schema<Task>({
@@ -9,6 +9,7 @@ const TaskSchema = new Schema<Task>({
     enum: ['pending', 'in-progress', 'completed'],
     default: 'pending',
   },
+  userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 }, {
   timestamps: true,
 });
