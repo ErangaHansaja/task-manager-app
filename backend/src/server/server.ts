@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import taskRouter from '../routers/task.router';
 
 // Load environment variables from env/.env
 dotenv.config({ path: './env/.env' });
@@ -21,6 +22,7 @@ class App {
   }
 
   private setupRoutes(): void {
+    this.app.use('/api', taskRouter);
     this.app.get('/', (req: Request, res: Response) => {
       res.send('Task Manager Backend is running!');
     });
