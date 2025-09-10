@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  template: `<h1>Task Manager App</h1><p>API URL: {{ apiUrl }}</p>`,
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontend';
+  apiUrl = environment.apiUrl;
 }
