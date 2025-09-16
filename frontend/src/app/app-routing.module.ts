@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 import { AuthGuard } from './services/auth/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Default to login
-  { path: 'login', /* component: LoginComponent */ }, // Uncomment and add import later
-  { path: 'register', /* component: RegisterComponent */ }, // Uncomment and add import later
-  { path: 'dashboard', /* component: DashboardComponent, */ canActivate: [AuthGuard] }, // Uncomment component later
-  { path: '**', redirectTo: '/login' } // Wildcard to login
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  // { path: 'dashboard', /* component: DashboardComponent, */ canActivate: [AuthGuard] }, // Commented to avoid error
+  { path: '**', redirectTo: '/login' }
 ];
 
 @NgModule({
