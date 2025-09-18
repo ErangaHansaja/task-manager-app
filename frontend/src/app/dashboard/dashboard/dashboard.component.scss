@@ -1,0 +1,42 @@
+.dashboard {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.task-form {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+}
+input, textarea, select {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+}
+button {
+  padding: 8px;
+  margin-right: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.task-list ul {
+  list-style: none;
+  padding: 0;
+}
+.task-list li {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+.error {
+  color: red;
+}
+@media (max-width: 600px) {
+  .dashboard {
+    padding: 10px;
+  }
+}
