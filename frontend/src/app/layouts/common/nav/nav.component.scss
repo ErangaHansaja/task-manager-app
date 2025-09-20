@@ -1,14 +1,7 @@
-nav {
-  background: #007bff;
+mat-toolbar {
+  background: linear-gradient(to right, #2196f3, #1976d2);
   color: white;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
 }
-button {
-  background: #ff4444;
-  color: white;
-  border: none;
-  padding: 8px;
-  cursor: pointer;
+.spacer {
+  flex: 1 1 auto;
 }

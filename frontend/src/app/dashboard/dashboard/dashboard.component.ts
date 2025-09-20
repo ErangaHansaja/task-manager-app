@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
     this.taskService.getTasks().subscribe({
       next: (tasks) => {
         this.tasks = tasks;
-        setTimeout(() => AOS.refresh(), 0); // Refresh AOS after tasks load
+        setTimeout(() => AOS.refresh(), 0); // Refresh AOS after initial load
       },
       error: (err) => this.errorMessage = err.error.message || 'Failed to load tasks'
     });
@@ -43,6 +43,7 @@ export class DashboardComponent implements OnInit {
           const index = this.tasks.findIndex(t => t._id === updatedTask._id);
           if (index !== -1) this.tasks[index] = updatedTask;
           this.resetForm();
+          setTimeout(() => AOS.refresh(), 0); // Refresh AOS after update
         },
         error: (err) => this.errorMessage = err.error.message || 'Failed to update task'
       });
@@ -51,8 +52,8 @@ export class DashboardComponent implements OnInit {
         next: (task) => {
           this.tasks.push(task);
           this.resetForm();
-          // GSAP slide-in for new task
           gsap.from(`#task-${task._id}`, { duration: 0.5, x: 100, opacity: 0 });
+          setTimeout(() => AOS.refresh(), 0); // Refresh AOS after create
         },
         error: (err) => this.errorMessage = err.error.message || 'Failed to create task'
       });
@@ -68,6 +69,7 @@ export class DashboardComponent implements OnInit {
     this.taskService.deleteTask(id).subscribe({
       next: () => {
         this.tasks = this.tasks.filter(t => t._id !== id);
+        setTimeout(() => AOS.refresh(), 0); // Refresh AOS after delete
       },
       error: (err) => this.errorMessage = err.error.message || 'Failed to delete task'
     });

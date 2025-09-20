@@ -1,12 +1,18 @@
-@import "~aos/dist/aos.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~aos/dist/aos.css';
 
 body {
-  font-family: 'Roboto', Arial, sans-serif;
-  background: #f4f4f4;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to bottom, #f0f4f8, #ffffff);
   margin: 0;
-  padding: 0;
   color: #333;
 }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 h1, h2, h3 {
   color: #2c3e50;
 }
@@ -18,3 +24,6 @@ a {
 a:hover {
   color: #0056b3;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

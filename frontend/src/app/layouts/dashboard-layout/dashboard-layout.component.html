@@ -1,7 +1,11 @@
-<div class="dashboard-wrapper">
-  <app-nav></app-nav>
-  <div class="content">
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" opened class="sidebar">
     <app-sidebar></app-sidebar>
-    <router-outlet></router-outlet>
-  </div>
-</div>
+  </mat-sidenav>
+  <mat-sidenav-content class="content">
+    <app-nav></app-nav>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

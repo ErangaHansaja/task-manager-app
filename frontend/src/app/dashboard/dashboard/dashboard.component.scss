@@ -76,3 +76,26 @@ button[type="button"]:hover {
     font-size: 14px;
   }
 }
+
+.task-form-card {
+  margin-bottom: 30px;
+  padding: 20px;
+}
+mat-card {
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: box-shadow 0.3s;
+}
+mat-card:hover {
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+button {
+  margin-right: 10px;
+}
+.error {
+  color: #f44336;
+}

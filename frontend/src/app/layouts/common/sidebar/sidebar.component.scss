@@ -1,13 +1,25 @@
-aside {
-  width: 200px;
-  background: #f0f0f0;
-  padding: 10px;
+mat-nav-list {
+  background: linear-gradient(to bottom, #e3f2fd, #bbdefb);
+  width: 250px;
+  height: 100vh;
+  padding-top: 70px;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  // padding: 0;
 }
-ul {
-  list-style: none;
-  padding: 0;
+a, span {
+  color: #1565c0;
+  font-weight: 500;
+  padding: 15px 20px;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-a {
-  color: #007bff;
-  text-decoration: none;
+a:hover, span:hover {
+  background: #1976d2;
+  color: white;
+}
+a mat-icon, span mat-icon {
+  margin-right: 10px;
 }
