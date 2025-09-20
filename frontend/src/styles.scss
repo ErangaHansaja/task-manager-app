@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~aos/dist/aos.css";
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+h1, h2, h3 {
+  color: #2c3e50;
+}
+a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+a:hover {
+  color: #0056b3;
+}

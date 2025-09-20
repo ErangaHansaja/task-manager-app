@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../../services/common/task.service';
 import { Task } from '../../services/model/task.model';
+import { gsap } from 'gsap';
+import AOS from 'aos';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +11,7 @@ import { Task } from '../../services/model/task.model';
 })
 export class DashboardComponent implements OnInit {
   tasks: Task[] = [];
-  currentTask: Task = { title: '', description: '', status: 'pending', userId: '' }; // Add userId
+  currentTask: Task = { title: '', description: '', status: 'pending', userId: '' };
   editingId: string | null = null;
   errorMessage: string = '';
 
@@ -21,7 +23,10 @@ export class DashboardComponent implements OnInit {
 
   loadTasks() {
     this.taskService.getTasks().subscribe({
-      next: (tasks) => this.tasks = tasks,
+      next: (tasks) => {
+        this.tasks = tasks;
+        setTimeout(() => AOS.refresh(), 0); // Refresh AOS after tasks load
+      },
       error: (err) => this.errorMessage = err.error.message || 'Failed to load tasks'
     });
   }
@@ -46,6 +51,8 @@ export class DashboardComponent implements OnInit {
         next: (task) => {
           this.tasks.push(task);
           this.resetForm();
+          // GSAP slide-in for new task
+          gsap.from(`#task-${task._id}`, { duration: 0.5, x: 100, opacity: 0 });
         },
         error: (err) => this.errorMessage = err.error.message || 'Failed to create task'
       });
