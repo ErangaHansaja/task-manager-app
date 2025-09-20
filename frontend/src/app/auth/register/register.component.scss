@@ -1,0 +1,20 @@
+.auth-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+}
+mat-card {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+button {
+  width: 100%;
+  padding: 12px;
+}
+.error {
+  color: #f44336;
+}

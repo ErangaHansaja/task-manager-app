@@ -1,0 +1,22 @@
+<div class="auth-container" data-aos="fade-up">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [(ngModel)]="user.email" name="email" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" [(ngModel)]="user.password" name="password" required>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Register</button>
+      </form>
+      <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+      <p>Already have an account? <a routerLink="/login">Login</a></p>
+    </mat-card-content>
+  </mat-card>
+</div>
