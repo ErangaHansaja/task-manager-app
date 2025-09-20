@@ -1,30 +1,46 @@
-<div class="dashboard">
-  <h2>Task Manager</h2>
-  <div class="task-form">
-    <h3>{{ editingId ? 'Edit Task' : 'Add Task' }}</h3>
-    <form (ngSubmit)="onSubmit()">
-      <input [(ngModel)]="currentTask.title" name="title" placeholder="Title" required>
-      <textarea [(ngModel)]="currentTask.description" name="description" placeholder="Description"></textarea>
-      <select [(ngModel)]="currentTask.status" name="status">
-        <option value="pending">Pending</option>
-        <option value="in-progress">In Progress</option>
-        <option value="completed">Completed</option>
-      </select>
-      <button type="submit">{{ editingId ? 'Update' : 'Create' }}</button>
-      <button type="button" *ngIf="editingId" (click)="resetForm()">Cancel</button>
-    </form>
-    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-  </div>
+<div class="dashboard" data-aos="fade-in">
+  <mat-card class="task-form-card" data-aos="zoom-in">
+    <mat-card-header>
+      <mat-card-title>{{ editingId ? 'Edit Task' : 'Add Task' }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput [(ngModel)]="currentTask.title" name="title" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea matInput [(ngModel)]="currentTask.description" name="description"></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select [(ngModel)]="currentTask.status" name="status">
+            <mat-option value="pending">Pending</mat-option>
+            <mat-option value="in-progress">In Progress</mat-option>
+            <mat-option value="completed">Completed</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">{{ editingId ? 'Update' : 'Create' }}</button>
+        <button mat-raised-button color="warn" type="button" *ngIf="editingId" (click)="resetForm()">Cancel</button>
+      </form>
+      <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+    </mat-card-content>
+  </mat-card>
   <div class="task-list">
     <h3>Tasks</h3>
-    <ul>
-      <li *ngFor="let task of tasks">
-        <strong>{{ task.title }}</strong>
+    <mat-card *ngFor="let task of tasks; let i = index" id="task-{{ task._id }}" data-aos="fade-up" attr.data-aos-delay="{{ i * 100 }}">
+      <mat-card-header>
+        <mat-card-title>{{ task.title }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
         <p>{{ task.description }}</p>
         <p>Status: {{ task.status }}</p>
-        <button (click)="editTask(task)">Edit</button>
-        <button (click)="deleteTask(task._id || '')">Delete</button>
-      </li>
-    </ul>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="editTask(task)">Edit</button>
+        <button mat-button color="warn" (click)="deleteTask(task._id || '')">Delete</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 </div>

@@ -1,10 +1,22 @@
-<div class="auth-container">
-  <h2>Login</h2>
-  <form (ngSubmit)="onSubmit()">
-    <input type="email" [(ngModel)]="user.email" placeholder="Email" required name="email">
-    <input type="password" [(ngModel)]="user.password" placeholder="Password" required name="password">
-    <button type="submit">Login</button>
-  </form>
-  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-  <p>Don't have an account? <a routerLink="/register">Register</a></p>
+<div class="auth-container" data-aos="fade-up">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [(ngModel)]="user.email" name="email" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" [(ngModel)]="user.password" name="password" required>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Login</button>
+      </form>
+      <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+      <p>Don't have an account? <a routerLink="/register">Register</a></p>
+    </mat-card-content>
+  </mat-card>
 </div>
