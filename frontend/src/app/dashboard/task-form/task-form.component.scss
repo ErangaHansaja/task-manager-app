@@ -1,0 +1,135 @@
+.task-form-dialog {
+  min-width: 480px;
+  max-width: 560px;
+
+  h2[mat-dialog-title] {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 16px;
+
+    mat-icon {
+      color: var(--accent-primary);
+    }
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-row {
+  margin-bottom: 16px;
+
+  &.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.category-group, .priority-group {
+  width: 100%;
+
+  .mat-button-toggle {
+    flex: 1;
+    font-size: 12px;
+  }
+}
+
+.category-group .mat-button-toggle {
+  .toggle-label {
+    margin-left: 4px;
+    font-size: 12px;
+  }
+}
+
+.priority-toggle-low.mat-button-toggle-checked {
+  background: rgba(96, 165, 250, 0.2);
+  color: var(--accent-info);
+}
+
+.priority-toggle-medium.mat-button-toggle-checked {
+  background: rgba(251, 191, 36, 0.2);
+  color: var(--accent-warning);
+}
+
+.priority-toggle-high.mat-button-toggle-checked {
+  background: rgba(251, 146, 60, 0.2);
+  color: #fb923c;
+}
+
+.priority-toggle-urgent.mat-button-toggle-checked {
+  background: rgba(248, 113, 113, 0.2);
+  color: var(--accent-danger);
+}
+
+.tags-section {
+  margin-bottom: 16px;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.tag-input {
+  flex: 1;
+  min-width: 120px;
+}
+
+.subtasks-section {
+  margin-top: 16px;
+}
+
+mat-divider {
+  margin: 16px 0;
+}
+
+.cancel-btn {
+  color: var(--text-secondary);
+}
+
+.submit-btn {
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    margin-right: 4px;
+  }
+}
+
+@media (max-width: 600px) {
+  .task-form-dialog {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .form-row.two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .category-group .toggle-label {
+    display: none;
+  }
+}

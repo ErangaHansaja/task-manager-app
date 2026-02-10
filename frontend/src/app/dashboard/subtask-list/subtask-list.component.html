@@ -1,0 +1,45 @@
+<div class="subtask-container">
+  <div class="subtask-header" *ngIf="subtasks.length > 0">
+    <span class="subtask-count"
+      >{{ completedCount }}/{{ subtasks.length }}</span
+    >
+    <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+  </div>
+
+  <div class="subtask-items">
+    <div
+      class="subtask-item"
+      *ngFor="let subtask of subtasks"
+      [class.completed]="subtask.completed"
+    >
+      <mat-checkbox
+        [checked]="subtask.completed"
+        (change)="toggleSubtask(subtask.id)"
+        [disabled]="!editable"
+      >
+        <span class="subtask-title">{{ subtask.title }}</span>
+      </mat-checkbox>
+      <button
+        mat-icon-button
+        class="remove-btn"
+        (click)="removeSubtask(subtask.id)"
+        *ngIf="editable"
+        matTooltip="Remove subtask"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="add-subtask" *ngIf="editable">
+    <mat-form-field appearance="outline" class="subtask-input">
+      <mat-icon matPrefix>add</mat-icon>
+      <input
+        matInput
+        [(ngModel)]="newSubtaskTitle"
+        placeholder="Add subtask"
+        (keydown.enter)="addSubtask()"
+      />
+    </mat-form-field>
+  </div>
+</div>

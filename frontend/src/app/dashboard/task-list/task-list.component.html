@@ -1,0 +1,124 @@
+<div class="task-list-container">
+  <div class="list-header">
+    <div class="header-top">
+      <h2 class="page-title">
+        <mat-icon>assignment</mat-icon>
+        Tasks
+      </h2>
+      <button
+        mat-fab
+        color="primary"
+        (click)="openCreateDialog()"
+        class="add-fab"
+        matTooltip="Create new task"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    <div class="filter-bar">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-icon matPrefix>search</mat-icon>
+        <input
+          matInput
+          [(ngModel)]="searchTerm"
+          (ngModelChange)="applyFilters()"
+          placeholder="Search tasks..."
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          *ngIf="searchTerm"
+          (click)="searchTerm = ''; applyFilters()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Category</mat-label>
+        <mat-select
+          [(ngModel)]="selectedCategory"
+          (ngModelChange)="applyFilters()"
+        >
+          <mat-option value="">All</mat-option>
+          <mat-option *ngFor="let cat of categories" [value]="cat">
+            {{ cat | titlecase }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Priority</mat-label>
+        <mat-select
+          [(ngModel)]="selectedPriority"
+          (ngModelChange)="applyFilters()"
+        >
+          <mat-option value="">All</mat-option>
+          <mat-option *ngFor="let p of priorities" [value]="p">
+            {{ p | titlecase }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Status</mat-label>
+        <mat-select
+          [(ngModel)]="selectedStatus"
+          (ngModelChange)="applyFilters()"
+        >
+          <mat-option value="">All</mat-option>
+          <mat-option *ngFor="let s of statuses" [value]="s">
+            {{ s | titlecase }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button
+        mat-icon-button
+        *ngIf="hasActiveFilters"
+        (click)="clearFilters()"
+        matTooltip="Clear filters"
+        class="clear-btn"
+      >
+        <mat-icon>filter_list_off</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="task-count" *ngIf="filteredTasks.length > 0">
+    <span
+      >{{ filteredTasks.length }} task{{
+        filteredTasks.length === 1 ? "" : "s"
+      }}</span
+    >
+  </div>
+
+  <div class="tasks-grid">
+    <app-task-card
+      *ngFor="let task of filteredTasks; trackBy: trackByTaskId"
+      [task]="task"
+      (edit)="openEditDialog($event)"
+      (delete)="deleteTask($event)"
+      (toggleComplete)="toggleComplete($event)"
+    >
+    </app-task-card>
+  </div>
+
+  <div class="empty-state" *ngIf="filteredTasks.length === 0">
+    <mat-icon>inbox</mat-icon>
+    <h3 *ngIf="!hasActiveFilters">No tasks yet</h3>
+    <h3 *ngIf="hasActiveFilters">No matching tasks</h3>
+    <p *ngIf="!hasActiveFilters">
+      Click the + button to create your first task
+    </p>
+    <p *ngIf="hasActiveFilters">Try adjusting your filters</p>
+    <button
+      mat-stroked-button
+      *ngIf="hasActiveFilters"
+      (click)="clearFilters()"
+    >
+      Clear Filters
+    </button>
+  </div>
+</div>

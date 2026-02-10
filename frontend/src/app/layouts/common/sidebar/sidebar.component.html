@@ -1,6 +1,29 @@
-<mat-nav-list>
-  <span mat-list-item routerLink="/dashboard">Tasks</span>
-  <span mat-list-item>Profile (Coming Soon)</span>
-  <span mat-list-item>Settings (Coming Soon)</span>
-  <span mat-list-item>Reports (Coming Soon)</span>
+<mat-nav-list class="sidebar-nav">
+  <div class="sidebar-section">
+    <span class="section-label">Main</span>
+    <a mat-list-item routerLink="/dashboard" routerLinkActive="active-link">
+      <mat-icon matListItemIcon>dashboard</mat-icon>
+      <span matListItemTitle>Tasks</span>
+    </a>
+  </div>
+
+  <div class="sidebar-section">
+    <span class="section-label">Coming Soon</span>
+    <a mat-list-item class="disabled-link">
+      <mat-icon matListItemIcon>today</mat-icon>
+      <span matListItemTitle>Today</span>
+    </a>
+    <a mat-list-item class="disabled-link">
+      <mat-icon matListItemIcon>date_range</mat-icon>
+      <span matListItemTitle>Upcoming</span>
+    </a>
+    <a mat-list-item class="disabled-link">
+      <mat-icon matListItemIcon>analytics</mat-icon>
+      <span matListItemTitle>Reports</span>
+    </a>
+    <a mat-list-item class="disabled-link">
+      <mat-icon matListItemIcon>settings</mat-icon>
+      <span matListItemTitle>Settings</span>
+    </a>
+  </div>
 </mat-nav-list>

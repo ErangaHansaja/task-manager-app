@@ -1,0 +1,71 @@
+<div class="task-detail">
+  <div class="detail-header">
+    <div class="title-section">
+      <span class="category-chip" [ngClass]="'category-' + task.category">{{
+        task.category
+      }}</span>
+      <h2>{{ task.title }}</h2>
+    </div>
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-dialog-content>
+    <p class="description" *ngIf="task.description">{{ task.description }}</p>
+
+    <div class="detail-grid">
+      <div class="detail-item">
+        <mat-icon [ngClass]="'priority-' + task.priority">{{
+          priorityIcon
+        }}</mat-icon>
+        <div>
+          <span class="detail-label">Priority</span>
+          <span class="detail-value" [ngClass]="'priority-' + task.priority">{{
+            task.priority | titlecase
+          }}</span>
+        </div>
+      </div>
+
+      <div class="detail-item">
+        <mat-icon>event</mat-icon>
+        <div>
+          <span class="detail-label">Due Date</span>
+          <span class="detail-value">{{ formattedDueDate }}</span>
+        </div>
+      </div>
+
+      <div class="detail-item">
+        <mat-icon>info_outline</mat-icon>
+        <div>
+          <span class="detail-label">Status</span>
+          <span class="status-badge" [ngClass]="'status-' + task.status">{{
+            task.status | titlecase
+          }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tags-section" *ngIf="task.tags && task.tags.length > 0">
+      <span class="section-label">Tags</span>
+      <div class="tags">
+        <span class="tag" *ngFor="let tag of task.tags">#{{ tag }}</span>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="subtasks-section">
+      <span class="section-label">Subtasks</span>
+      <app-subtask-list
+        [subtasks]="task.subtasks"
+        (subtasksChange)="onSubtasksChange($event)"
+      >
+      </app-subtask-list>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-flat-button color="primary" (click)="close()">Done</button>
+  </mat-dialog-actions>
+</div>

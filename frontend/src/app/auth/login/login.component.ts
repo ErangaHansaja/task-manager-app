@@ -25,4 +25,9 @@ export class LoginComponent {
       }
     });
   }
+
+  continueLocal(): void {
+    localStorage.setItem('localMode', 'true');
+    this.router.navigate(['/dashboard']);
+  }
 }

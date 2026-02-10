@@ -1,7 +1,20 @@
-<mat-toolbar color="primary">
-  <span>Task Manager</span>
+<mat-toolbar class="navbar">
+  <div class="nav-brand">
+    <mat-icon class="brand-icon">rocket_launch</mat-icon>
+    <span class="brand-text">TaskFlow</span>
+  </div>
   <span class="spacer"></span>
-  <button mat-icon-button (click)="logout()">
-    <mat-icon>logout</mat-icon>
-  </button>
+  <div class="nav-actions">
+    <button mat-icon-button matTooltip="Notifications" class="nav-btn">
+      <mat-icon>notifications_none</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      matTooltip="Logout"
+      (click)="logout()"
+      class="nav-btn"
+    >
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>
