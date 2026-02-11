@@ -1,0 +1,81 @@
+<mat-card
+  class="task-card"
+  [class.completed]="task.status === 'completed'"
+  [class.overdue]="isOverdue"
+>
+  <div class="card-top-bar">
+    <span class="category-chip" [ngClass]="'category-' + task.category">
+      {{ task.category }}
+    </span>
+    <div class="card-actions">
+      <button mat-icon-button [matMenuTriggerFor]="taskMenu" class="menu-btn">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #taskMenu="matMenu">
+        <button mat-menu-item (click)="onEdit()">
+          <mat-icon>edit</mat-icon>
+          <span>Edit</span>
+        </button>
+        <button mat-menu-item (click)="onDelete()" class="delete-action">
+          <mat-icon>delete_outline</mat-icon>
+          <span>Delete</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+
+  <mat-card-content>
+    <div class="task-header">
+      <mat-checkbox
+        [checked]="task.status === 'completed'"
+        (change)="onToggleComplete()"
+        class="complete-checkbox"
+      >
+      </mat-checkbox>
+      <h3 class="task-title" [class.done]="task.status === 'completed'">
+        {{ task.title }}
+      </h3>
+    </div>
+
+    <p class="task-description" *ngIf="task.description">
+      {{ task.description }}
+    </p>
+
+    <div class="task-meta">
+      <span
+        class="priority-indicator"
+        [ngClass]="'priority-' + task.priority"
+        matTooltip="Priority: {{ task.priority }}"
+      >
+        <mat-icon>{{ priorityIcon }}</mat-icon>
+        {{ task.priority }}
+      </span>
+
+      <span
+        class="due-date"
+        *ngIf="task.dueDate"
+        [class.overdue-text]="isOverdue"
+      >
+        <mat-icon>schedule</mat-icon>
+        {{ formattedDueDate }}
+      </span>
+
+      <span class="subtask-indicator" *ngIf="subtaskCount">
+        <mat-icon>checklist</mat-icon>
+        {{ subtaskCount }}
+      </span>
+    </div>
+
+    <mat-progress-bar
+      *ngIf="task.subtasks && task.subtasks.length > 0"
+      mode="determinate"
+      [value]="subtaskProgress"
+      class="subtask-progress"
+    >
+    </mat-progress-bar>
+
+    <div class="task-tags" *ngIf="task.tags && task.tags.length > 0">
+      <span class="tag" *ngFor="let tag of task.tags">#{{ tag }}</span>
+    </div>
+  </mat-card-content>
+</mat-card>

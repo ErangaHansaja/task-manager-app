@@ -1,30 +1,25 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
+import { SharedModule } from '../shared/shared.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { TaskListComponent } from './task-list/task-list.component';
+import { TaskCardComponent } from './task-card/task-card.component';
+import { TaskFormComponent } from './task-form/task-form.component';
+import { TaskDetailComponent } from './task-detail/task-detail.component';
+import { SubtaskListComponent } from './subtask-list/subtask-list.component';
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    TaskListComponent,
+    TaskCardComponent,
+    TaskFormComponent,
+    TaskDetailComponent,
+    SubtaskListComponent,
   ],
   imports: [
-    CommonModule,
-    FormsModule,
+    SharedModule,
     DashboardRoutingModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatIconModule
-  ]
+  ],
 })
-export class DashboardModule { }
+export class DashboardModule {}

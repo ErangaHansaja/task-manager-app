@@ -1,7 +1,43 @@
-mat-toolbar {
-  background: linear-gradient(to right, #2196f3, #1976d2);
-  color: white;
+.navbar {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  height: 56px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
 }
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-icon {
+  color: var(--accent-primary);
+  font-size: 24px;
+}
+
+.brand-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+}
+
 .spacer {
-  flex: 1 1 auto;
+  flex: 1;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.nav-btn {
+  color: var(--text-secondary);
+
+  &:hover {
+    color: var(--text-primary);
+  }
 }

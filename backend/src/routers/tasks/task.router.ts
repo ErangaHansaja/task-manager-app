@@ -12,6 +12,10 @@ router
   .post(verifyToken, taskController.createTask.bind(taskController));
 
 router
+  .route('/reorder')
+  .patch(verifyToken, taskController.reorderTasks.bind(taskController));
+
+router
   .route('/:id')
   .get(verifyToken, taskController.getTaskById.bind(taskController))
   .put(verifyToken, taskController.updateTask.bind(taskController))

@@ -1,29 +1,312 @@
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import '~aos/dist/aos.css';
+@use "@angular/material" as mat;
 
+$dark-primary: mat.define-palette(mat.$indigo-palette, 400, 300, 600);
+$dark-accent: mat.define-palette(mat.$cyan-palette, A200, A100, A400);
+$dark-warn: mat.define-palette(mat.$red-palette, A200);
+
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $dark-primary,
+      accent: $dark-accent,
+      warn: $dark-warn,
+    ),
+    typography: mat.define-typography-config(
+        $font-family: 'Inter, Roboto, "Helvetica Neue", sans-serif',
+      ),
+    density: 0,
+  )
+);
+
+@include mat.all-component-themes($dark-theme);
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --bg-primary: #0f1117;
+  --bg-secondary: #1a1d27;
+  --bg-card: #1e2130;
+  --bg-elevated: #252838;
+  --bg-hover: #2a2d3e;
+  --border-color: #2e3347;
+  --text-primary: #e8eaed;
+  --text-secondary: #9aa0b4;
+  --text-muted: #6b7280;
+  --accent-primary: #6366f1;
+  --accent-secondary: #22d3ee;
+  --accent-success: #34d399;
+  --accent-warning: #fbbf24;
+  --accent-danger: #f87171;
+  --accent-info: #60a5fa;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
 body {
-  font-family: 'Roboto', sans-serif;
-  background: linear-gradient(to bottom, #f0f4f8, #ffffff);
+  height: 100%;
   margin: 0;
-  color: #333;
-}
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  padding: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: "Inter", "Roboto", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3 {
-  color: #2c3e50;
-}
 a {
-  color: #007bff;
+  color: var(--accent-secondary);
   text-decoration: none;
-  transition: color 0.3s;
-}
-a:hover {
-  color: #0056b3;
+  transition: color var(--transition-fast);
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+a:hover {
+  color: var(--accent-primary);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Material Overrides for Dark Theme */
+
+/* Dialog centering and dark background */
+.mat-mdc-dialog-container {
+  --mdc-dialog-container-color: var(--bg-card) !important;
+}
+
+.task-dialog .mat-mdc-dialog-container {
+  border-radius: var(--radius-lg) !important;
+  border: 1px solid var(--border-color);
+}
+
+/* Force fix overlay container positioning */
+.cdk-overlay-container {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* 
+   Force overlay wrappers to overlap and cover viewport
+   This prevents dialog wrapper from pushing datepicker bounding box down
+*/
+.cdk-global-overlay-wrapper,
+.cdk-overlay-connected-position-bounding-box {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 
+   Connected overlays (datepicker, menu) MUST vary based on inline styles
+   So the pane itself must be absolute relative to the bounding box
+   AND must have pointer-events auto to be clickable!
+*/
+.cdk-overlay-connected-position-bounding-box .cdk-overlay-pane {
+  position: absolute !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure global overlay panes (dialogs) also accept clicks */
+.cdk-global-overlay-wrapper .cdk-overlay-pane {
+  pointer-events: auto !important;
+}
+
+
+
+/* Force center all dialog overlays */
+.cdk-global-overlay-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  pointer-events: none;
+}
+
+
+
+
+.cdk-global-overlay-wrapper .cdk-overlay-pane {
+  pointer-events: auto;
+}
+
+/* Ensure datepicker popup stays compact */
+.cdk-overlay-pane:has(.mat-datepicker-content) {
+  max-width: 320px !important;
+}
+
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: var(--bg-elevated);
+  --mdc-snackbar-supporting-text-color: var(--text-primary);
+}
+
+.mat-mdc-card {
+  --mdc-elevated-card-container-color: var(--bg-card);
+}
+
+/* Datepicker Dark Theme - Compact Calendar */
+.mat-datepicker-content {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-primary) !important;
+  border-radius: var(--radius-md) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.mat-datepicker-content .mat-calendar {
+  width: 296px !important;
+  height: auto !important;
+}
+
+/* Fix duplicated text in datepicker headers (SundayS, MondayM etc) */
+.cdk-visually-hidden {
+  display: none !important;
+}
+
+.mat-calendar-header {
+  padding: 8px !important;
+}
+
+.mat-calendar-controls {
+  margin: 0 !important;
+}
+
+.mat-calendar-period-button {
+  color: var(--text-primary) !important;
+}
+
+
+.mat-calendar-arrow {
+  fill: var(--text-secondary) !important;
+}
+
+.mat-calendar-previous-button,
+.mat-calendar-next-button {
+  color: var(--text-secondary) !important;
+}
+
+.mat-calendar-table-header th {
+  color: var(--text-muted) !important;
+  font-size: 11px !important;
+}
+
+.mat-calendar-body-label {
+  color: var(--text-secondary) !important;
+}
+
+.mat-calendar-body-cell-content {
+  color: var(--text-primary) !important;
+}
+
+.mat-calendar-body-disabled > .mat-calendar-body-cell-content {
+  color: var(--text-muted) !important;
+}
+
+.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
+  > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+  background-color: var(--bg-hover) !important;
+}
+
+.mat-calendar-body-selected {
+  background-color: var(--accent-primary) !important;
+  color: #fff !important;
+}
+
+.mat-calendar-body-today:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+  border-color: var(--accent-primary) !important;
+}
+
+/* Form field outlines in dark theme */
+.mat-mdc-form-field {
+  --mdc-outlined-text-field-outline-color: var(--border-color);
+  --mdc-outlined-text-field-hover-outline-color: var(--text-muted);
+  --mdc-outlined-text-field-focus-outline-color: var(--accent-primary);
+  --mdc-outlined-text-field-input-text-color: var(--text-primary);
+  --mdc-outlined-text-field-label-text-color: var(--text-secondary);
+  --mdc-outlined-text-field-hover-label-text-color: var(--text-primary);
+  --mdc-outlined-text-field-focus-label-text-color: var(--accent-primary);
+}
+.priority-low {
+  color: var(--accent-info);
+}
+.priority-medium {
+  color: var(--accent-warning);
+}
+.priority-high {
+  color: #fb923c;
+}
+.priority-urgent {
+  color: var(--accent-danger);
+}
+
+/* Category Colors */
+.category-personal {
+  background: rgba(99, 102, 241, 0.15);
+  color: var(--accent-primary);
+}
+.category-work {
+  background: rgba(34, 211, 238, 0.15);
+  color: var(--accent-secondary);
+}
+.category-study {
+  background: rgba(52, 211, 153, 0.15);
+  color: var(--accent-success);
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-pending {
+  background: rgba(251, 191, 36, 0.15);
+  color: var(--accent-warning);
+}
+
+.status-in-progress {
+  background: rgba(96, 165, 250, 0.15);
+  color: var(--accent-info);
+}
+
+.status-completed {
+  background: rgba(52, 211, 153, 0.15);
+  color: var(--accent-success);
+}

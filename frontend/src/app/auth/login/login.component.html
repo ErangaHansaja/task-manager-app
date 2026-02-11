@@ -1,22 +1,59 @@
-<div class="auth-container" data-aos="fade-up">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Login</mat-card-title>
-    </mat-card-header>
+<div class="auth-container">
+  <mat-card class="login-card">
+    <div class="card-header">
+      <mat-icon class="brand-icon">rocket_launch</mat-icon>
+      <h2>Task Manager</h2>
+      <p class="subtitle">Sign in to sync your tasks across devices</p>
+    </div>
     <mat-card-content>
       <form (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline" class="full-width">
           <mat-label>Email</mat-label>
-          <input matInput type="email" [(ngModel)]="user.email" name="email" required>
+          <mat-icon matPrefix>email</mat-icon>
+          <input
+            matInput
+            type="email"
+            [(ngModel)]="user.email"
+            name="email"
+            required
+          />
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline" class="full-width">
           <mat-label>Password</mat-label>
-          <input matInput type="password" [(ngModel)]="user.password" name="password" required>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input
+            matInput
+            type="password"
+            [(ngModel)]="user.password"
+            name="password"
+            required
+          />
         </mat-form-field>
-        <button mat-raised-button color="primary" type="submit">Login</button>
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+          class="full-width submit-btn"
+        >
+          Sign In
+        </button>
       </form>
       <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-      <p>Don't have an account? <a routerLink="/register">Register</a></p>
+
+      <mat-divider class="divider"></mat-divider>
+
+      <button
+        mat-stroked-button
+        class="full-width local-btn"
+        (click)="continueLocal()"
+      >
+        <mat-icon>offline_bolt</mat-icon>
+        Continue Without Account
+      </button>
+
+      <p class="register-link">
+        Don't have an account? <a routerLink="/register">Register</a>
+      </p>
     </mat-card-content>
   </mat-card>
 </div>

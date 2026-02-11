@@ -1,0 +1,147 @@
+<div class="task-form-dialog">
+  <h2 mat-dialog-title>
+    <mat-icon>{{ isEdit ? "edit" : "add_task" }}</mat-icon>
+    <span>{{ isEdit ? "Edit Task" : "New Task" }}</span>
+  </h2>
+
+  <mat-dialog-content>
+    <form (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Title</mat-label>
+        <input
+          matInput
+          [(ngModel)]="title"
+          name="title"
+          required
+          placeholder="What needs to be done?"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          [(ngModel)]="description"
+          name="description"
+          rows="3"
+          placeholder="Add details..."
+        ></textarea>
+      </mat-form-field>
+
+      <div class="form-row">
+        <div class="field-group">
+          <label class="field-label">Category</label>
+          <mat-button-toggle-group
+            [(ngModel)]="category"
+            name="category"
+            class="category-group"
+          >
+            <mat-button-toggle
+              *ngFor="let cat of categories"
+              [value]="cat.value"
+              [matTooltip]="cat.label"
+            >
+              <mat-icon>{{ cat.icon }}</mat-icon>
+              <span class="toggle-label">{{ cat.label }}</span>
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field-group">
+          <label class="field-label">Priority</label>
+          <mat-button-toggle-group
+            [(ngModel)]="priority"
+            name="priority"
+            class="priority-group"
+          >
+            <mat-button-toggle
+              *ngFor="let p of priorities"
+              [value]="p.value"
+              [class]="'priority-toggle-' + p.value"
+            >
+              {{ p.label }}
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </div>
+
+      <div class="form-row two-col">
+        <mat-form-field appearance="outline">
+          <mat-label>Due Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [(ngModel)]="dueDate"
+            name="dueDate"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker [touchUi]="false"></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" *ngIf="isEdit">
+          <mat-label>Status</mat-label>
+          <mat-select [(ngModel)]="status" name="status">
+            <mat-option value="pending">Pending</mat-option>
+            <mat-option value="in-progress">In Progress</mat-option>
+            <mat-option value="completed">Completed</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="tags-section">
+        <label class="field-label">Tags</label>
+        <div class="tags-container">
+          <mat-chip-set>
+            <mat-chip
+              *ngFor="let tag of tags"
+              (removed)="removeTag(tag)"
+              highlighted
+            >
+              {{ tag }}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-set>
+          <mat-form-field appearance="outline" class="tag-input">
+            <input
+              matInput
+              [(ngModel)]="tagInput"
+              name="tagInput"
+              placeholder="Add tag..."
+              (keydown.enter)="$event.preventDefault(); addTag()"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="subtasks-section">
+        <label class="field-label">Subtasks</label>
+        <app-subtask-list
+          [subtasks]="subtasks"
+          (subtasksChange)="onSubtasksChange($event)"
+        >
+        </app-subtask-list>
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()" class="cancel-btn">Cancel</button>
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="onSubmit()"
+      [disabled]="!title.trim()"
+      class="submit-btn"
+    >
+      <mat-icon>{{ isEdit ? "save" : "add" }}</mat-icon>
+      {{ isEdit ? "Save Changes" : "Create Task" }}
+    </button>
+  </mat-dialog-actions>
+</div>

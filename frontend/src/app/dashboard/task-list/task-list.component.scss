@@ -1,0 +1,121 @@
+.task-list-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 8px;
+}
+
+.list-header {
+  margin-bottom: 24px;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+
+  mat-icon {
+    color: var(--accent-primary);
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.add-fab {
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-normal);
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.search-field {
+  flex: 2;
+  min-width: 200px;
+}
+
+.filter-field {
+  flex: 1;
+  min-width: 120px;
+}
+
+.clear-btn {
+  margin-top: 8px;
+  color: var(--text-secondary);
+}
+
+.task-count {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tasks-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+
+  mat-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: var(--border-color);
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 8px;
+  }
+
+  p {
+    font-size: 14px;
+    margin: 0 0 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .filter-bar {
+    flex-direction: column;
+  }
+
+  .search-field, .filter-field {
+    width: 100%;
+    flex: unset;
+    min-width: unset;
+  }
+
+  .page-title {
+    font-size: 22px;
+  }
+}
