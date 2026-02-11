@@ -1,23 +1,26 @@
 .subtask-container {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .subtask-header {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 4px;
 
   .subtask-count {
     font-size: 12px;
+    font-weight: 600;
     color: var(--text-secondary);
     white-space: nowrap;
-    font-weight: 500;
   }
 
   mat-progress-bar {
     flex: 1;
-    border-radius: 4px;
+    height: 4px;
+    border-radius: 2px;
   }
 }
 
@@ -39,15 +42,19 @@
     background: var(--bg-hover);
   }
 
-  &.completed .subtask-title {
-    text-decoration: line-through;
-    color: var(--text-muted);
+  &.completed {
+    mat-checkbox {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
   }
 
   .remove-btn {
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
     opacity: 0;
-    transform: scale(0.8);
-    transition: all var(--transition-fast);
+    transition: opacity var(--transition-fast);
 
     mat-icon {
       font-size: 16px;
@@ -58,20 +65,40 @@
 
   &:hover .remove-btn {
     opacity: 1;
-    transform: scale(1);
   }
 }
 
-.subtask-title {
-  font-size: 13px;
-  color: var(--text-primary);
-}
+.add-subtask-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--transition-fast);
 
-.add-subtask {
-  margin-top: 8px;
+  &:focus-within {
+    border-color: var(--accent-primary);
+  }
+
+  .add-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: var(--text-muted);
+  }
 
   .subtask-input {
-    width: 100%;
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
     font-size: 13px;
+    font-family: inherit;
+
+    &::placeholder {
+      color: var(--text-muted);
+    }
   }
 }

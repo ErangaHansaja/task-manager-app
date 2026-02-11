@@ -45,4 +45,8 @@ export class SubtaskListComponent {
     this.subtasks = this.subtasks.filter(s => s.id !== id);
     this.subtasksChange.emit(this.subtasks);
   }
+
+  trackById(index: number, item: { id: string }): string {
+    return item.id;
+  }
 }
