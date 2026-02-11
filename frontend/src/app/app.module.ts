@@ -27,9 +27,7 @@ import { SidebarComponent } from './layouts/common/sidebar/sidebar.component';
     AppRoutingModule,
     SharedModule,
   ],
-  providers: [
-    { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
-  ],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

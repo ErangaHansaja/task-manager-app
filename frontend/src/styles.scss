@@ -105,6 +105,39 @@ a:hover {
   border: 1px solid var(--border-color);
 }
 
+/* Force fix overlay container positioning */
+.cdk-overlay-container {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* 
+   Force overlay wrappers to overlap and cover viewport
+   This prevents dialog wrapper from pushing datepicker bounding box down
+*/
+.cdk-global-overlay-wrapper,
+.cdk-overlay-connected-position-bounding-box {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 
+   Connected overlays (datepicker, menu) MUST vary based on inline styles
+   So the pane itself must be absolute relative to the bounding box
+*/
+.cdk-overlay-connected-position-bounding-box .cdk-overlay-pane {
+  position: absolute !important;
+}
+
+
 /* Force center all dialog overlays */
 .cdk-global-overlay-wrapper {
   display: flex !important;
@@ -112,6 +145,9 @@ a:hover {
   justify-content: center !important;
   pointer-events: none;
 }
+
+
+
 
 .cdk-global-overlay-wrapper .cdk-overlay-pane {
   pointer-events: auto;
@@ -145,6 +181,11 @@ a:hover {
   height: auto !important;
 }
 
+/* Fix duplicated text in datepicker headers (SundayS, MondayM etc) */
+.cdk-visually-hidden {
+  display: none !important;
+}
+
 .mat-calendar-header {
   padding: 8px !important;
 }
@@ -156,6 +197,7 @@ a:hover {
 .mat-calendar-period-button {
   color: var(--text-primary) !important;
 }
+
 
 .mat-calendar-arrow {
   fill: var(--text-secondary) !important;
