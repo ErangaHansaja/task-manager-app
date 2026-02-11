@@ -93,6 +93,7 @@ a:hover {
   background: var(--text-muted);
 }
 
+/* Material Overrides for Dark Theme */
 .mat-mdc-dialog-container {
   --mdc-dialog-container-color: var(--bg-card) !important;
 }
@@ -106,6 +107,41 @@ a:hover {
   --mdc-elevated-card-container-color: var(--bg-card);
 }
 
+/* Datepicker Dark Theme Fixes */
+.mat-datepicker-content {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-primary) !important;
+}
+
+.mat-calendar-body-label,
+.mat-calendar-period-button {
+  color: var(--text-primary) !important;
+}
+
+.mat-calendar-table-header th {
+  color: var(--text-secondary) !important;
+}
+
+.mat-calendar-body-cell-content {
+  color: var(--text-primary) !important;
+  border-color: transparent !important;
+}
+
+.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
+  > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected) {
+  background-color: var(--bg-hover) !important;
+}
+
+.mat-calendar-arrow {
+  fill: var(--text-secondary) !important;
+}
+
+.mat-calendar-previous-button,
+.mat-calendar-next-button {
+  color: var(--text-secondary) !important;
+}
+
+/* Priority Colors */
 .priority-low {
   color: var(--accent-info);
 }
@@ -119,6 +155,7 @@ a:hover {
   color: var(--accent-danger);
 }
 
+/* Category Colors */
 .category-personal {
   background: rgba(99, 102, 241, 0.15);
   color: var(--accent-primary);
@@ -132,6 +169,7 @@ a:hover {
   color: var(--accent-success);
 }
 
+/* Status Badges */
 .status-badge {
   display: inline-flex;
   align-items: center;
