@@ -1,6 +1,8 @@
 <div class="subtask-container">
   <div class="subtask-header" *ngIf="subtasks.length > 0">
-    <span class="subtask-count">{{ completedCount }}/{{ subtasks.length }}</span>
+    <span class="subtask-count"
+      >{{ completedCount }}/{{ subtasks.length }}</span
+    >
     <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
   </div>
 
@@ -31,12 +33,20 @@
 
   <div class="add-subtask" *ngIf="editable">
     <div class="add-subtask-row">
-      <mat-icon class="add-icon">add</mat-icon>
+      <button
+        mat-icon-button
+        class="add-btn"
+        (click)="addSubtask()"
+        type="button"
+        matTooltip="Add subtask"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
       <input
         class="subtask-input"
         [(ngModel)]="newSubtaskTitle"
         [ngModelOptions]="{ standalone: true }"
-        placeholder="Add subtask"
+        placeholder="Add subtask (press Enter)"
         (keydown.enter)="$event.preventDefault(); addSubtask()"
       />
     </div>

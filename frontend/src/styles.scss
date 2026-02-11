@@ -132,10 +132,18 @@ a:hover {
 /* 
    Connected overlays (datepicker, menu) MUST vary based on inline styles
    So the pane itself must be absolute relative to the bounding box
+   AND must have pointer-events auto to be clickable!
 */
 .cdk-overlay-connected-position-bounding-box .cdk-overlay-pane {
   position: absolute !important;
+  pointer-events: auto !important;
 }
+
+/* Ensure global overlay panes (dialogs) also accept clicks */
+.cdk-global-overlay-wrapper .cdk-overlay-pane {
+  pointer-events: auto !important;
+}
+
 
 
 /* Force center all dialog overlays */
